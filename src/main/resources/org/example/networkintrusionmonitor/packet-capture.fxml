@@ -1,28 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22"
-            fx:controller="org.example.networkintrusionmonitor.controller.PacketCaptureController">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.networkintrusionmonitor.Controller.PacketCaptureController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
                 <Menu mnemonicParsing="false" text="Traffic Analysis">
                     <items>
-                        <MenuItem fx:id="activeConnectionsMenuItem" mnemonicParsing="false"
-                                  onAction="#displayActiveConnections" text="Active Connections"/>
-                        <MenuItem fx:id="trafficByIPMenuItem" mnemonicParsing="false" onAction="#displayTrafficByIP"
-                                  text="Traffic by IP"/>
-                        <MenuItem fx:id="globalStatisticsMenuItem" mnemonicParsing="false"
-                                  onAction="#displayGlobalStatistics" text="Global Statistics"/>
+                        <MenuItem fx:id="activeConnectionsMenuItem" mnemonicParsing="false" onAction="#displayActiveConnections" text="Active Connections" />
+                        <MenuItem fx:id="trafficByIPMenuItem" mnemonicParsing="false" onAction="#displayTrafficByIP" text="Traffic by IP" />
+                        <MenuItem fx:id="globalStatisticsMenuItem" mnemonicParsing="false" onAction="#displayGlobalStatistics" text="Global Statistics" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Intrusion Alerts">
                     <items>
-                        <MenuItem fx:id="displayAlertMenuItem" mnemonicParsing="false" onAction="#displayAlerts"
-                                  text="Display"/>
+                        <MenuItem fx:id="displayAlertMenuItem" mnemonicParsing="false" onAction="#displayAlerts" text="Display" />
                     </items>
                 </Menu>
             </menus>
@@ -34,96 +39,54 @@
                 <HBox spacing="10">
                     <HBox alignment="BASELINE_LEFT" spacing="8.0" HBox.hgrow="ALWAYS">
                         <children>
-                            <Label alignment="BASELINE_LEFT" text="Interface: ">
+                            <Label alignment="BASELINE_LEFT" text="Network Interface ">
                                 <font>
-                                    <Font name="System Bold" size="12.0"/>
+                                    <Font name="System Bold" size="12.0" />
                                 </font>
                             </Label>
-                            <ComboBox fx:id="networkInterfacesComboBox" prefWidth="450.0"/>
+                            <ComboBox fx:id="networkInterfacesComboBox" prefHeight="25.0" prefWidth="619.0" />
                         </children>
                     </HBox>
                     <HBox spacing="8.0">
                         <children>
-                            <Button fx:id="startCaptureButton" onAction="#startCapture" text="Start Capture"/>
-                            <Button fx:id="stopCaptureButton" disable="true" onAction="#stopCapture"
-                                    text="Stop Capture"/>
+                            <Button fx:id="startCaptureButton" onAction="#startCapture" text="Start Capture" textFill="#22b537" />
+                            <Button fx:id="stopCaptureButton" disable="true" onAction="#stopCapture" text="Stop Capture" textFill="#e01d1d" />
                         </children>
                     </HBox>
                 </HBox>
-
-                <Separator fx:id="separator1"/>
                 <HBox>
                     <children>
-                        <Label text="Packets : ">
+                        <Label>
                             <font>
-                                <Font name="System Bold" size="12.0"/>
+                                <Font name="System Bold" size="12.0" />
                             </font>
                             <HBox.margin>
-                                <Insets/>
+                                <Insets />
                             </HBox.margin>
                         </Label>
 
                         <HBox spacing="10" HBox.hgrow="ALWAYS">
-                            <Label text="Filter by Protocol:"/>
-                            <TextField fx:id="protocolSearchField" prefHeight="25.0" prefWidth="344.0"
-                                       promptText="Enter Protocol (e.g., TCP)"/>
+                            <Label text="Filter by Protocol:" />
+                            <TextField fx:id="protocolSearchField" prefHeight="25.0" prefWidth="807.0" promptText="Enter Protocol (e.g., TCP)" />
                             <HBox.margin>
-                                <Insets/>
+                                <Insets />
                             </HBox.margin>
                             <padding>
-                                <Insets left="13.0"/>
+                                <Insets left="13.0" />
                             </padding>
                         </HBox>
                     </children>
                 </HBox>
                 <TableView fx:id="packetTableView" prefHeight="405.0" prefWidth="868.0">
                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                     </columnResizePolicy>
                 </TableView>
-                <Separator fx:id="separator2"/>
-                <HBox spacing="10.0">
-                    <children>
-                        <VBox>
-                            <children>
-
-                                <Label text="Raw Packet Data : ">
-                                    <font>
-                                        <Font name="System Bold" size="12.0"/>
-                                    </font>
-                                </Label>
-                                <TextArea fx:id="packetRawDataArea" editable="false" prefHeight="197.0"
-                                          prefWidth="868.0"/>
-                            </children>
-                        </VBox>
-                        <VBox>
-                            <children>
-                                <Label text="Hex Stream : ">
-                                    <font>
-                                        <Font name="System Bold" size="12.0"/>
-                                    </font>
-                                </Label>
-                                <TextArea fx:id="hexStreamArea" editable="false" prefHeight="197.0" prefWidth="868.0"/>
-                            </children>
-                        </VBox>
-                        <VBox>
-                            <children>
-                                <Label text="Decoded content : ">
-                                    <font>
-                                        <Font name="System Bold" size="12.0"/>
-                                    </font>
-                                </Label>
-                                <TextArea fx:id="decodedContentArea" editable="false" prefHeight="197.0"
-                                          prefWidth="868.0"/>
-                            </children>
-                        </VBox>
-                    </children>
-                </HBox>
 
                 <!--                <Button fx:id="analyzeButton" onAction="#analyzeTraffic" text="Analyze Traffic"/>-->
             </children>
             <BorderPane.margin>
-                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
             </BorderPane.margin>
         </VBox>
     </center>
