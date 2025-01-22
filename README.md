@@ -67,5 +67,5 @@ View and manage alerts in the Alerts section
 
 Set up custom alert thresholds
 Configure notification preferences
-Manage alert rules
+Manage alert rules 
 
